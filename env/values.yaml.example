@@ -23,6 +23,15 @@ worker1_count: 1
 worker2_count: 0
 worker3_count: 0
 worker4_count: 0
+# Add node labels (key=value) per worker type
+worker1_labels:
+  - "node.kubernetes.io/type=worker1"
+worker2_labels:
+  - "node.kubernetes.io/type=worker2"
+worker3_labels:
+  - "node.kubernetes.io/type=worker3"
+worker4_labels:
+  - "node.kubernetes.io/type=worker4"
 # Domain for master, workers and lb. (rDNS, Hostname)
 domain: example.com
 # Tested 1.15.5 and 1.16.2 and 1.17.4

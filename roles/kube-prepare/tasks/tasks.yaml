@@ -11,6 +11,16 @@
   copy:
     src: "{{ playbook_dir }}/roles/kube-prepare/files/20-hetzner-cloud.conf"
     dest: /etc/systemd/system/kubelet.service.d/20-hetzner-cloud.conf
+  when:
+    - hostvars[inventory_hostname].group_names[1] is not defined or hostvars[inventory_hostname].group_names[1] is not match ("worker.")
+
+- name: Create cloud config provider flag for kubeadm
+  template:
+    src: 20-hetzner-cloud.conf.j2
+    dest: /etc/systemd/system/kubelet.service.d/20-hetzner-cloud.conf
+  when:
+    - hostvars[inventory_hostname].group_names[1] is defined
+    - hostvars[inventory_hostname].group_names[1] is match ("worker.")
 
 - name: Create Docker Service directory if it does not exist
   file:
