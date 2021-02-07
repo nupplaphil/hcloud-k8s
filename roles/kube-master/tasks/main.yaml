@@ -5,7 +5,7 @@
   register: master
 
 - include: tasks.yaml
-  when: not master.stat.exists
+  when: not master.stat.exists and (ingress_enabled | bool)
 
 - name: Create Join Command for the nodes
   shell: kubeadm token create --print-join-command

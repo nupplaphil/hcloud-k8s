@@ -143,13 +143,17 @@ resource "hcloud_server_network" "worker_network" {
 }
 
 resource "hcloud_load_balancer" "k8s-loadbalancer" {
+  count = var.lb_enabled ? 1 : 0
+
   load_balancer_type = var.lb_type
   location = var.lb_datacenter
   name = "k8s-loadbalancer"
 }
 
 resource "hcloud_load_balancer_network" "kubernetes" {
-  load_balancer_id = hcloud_load_balancer.k8s-loadbalancer.id
+  count = var.lb_enabled ? 1 : 0
+
+  load_balancer_id = hcloud_load_balancer.k8s-loadbalancer[0].id
   subnet_id = hcloud_network_subnet.worker.id
   ip = "10.0.2.1"
 
@@ -157,7 +161,9 @@ resource "hcloud_load_balancer_network" "kubernetes" {
 }
 
 resource "hcloud_load_balancer_target" "k8s-targets" {
-  load_balancer_id = hcloud_load_balancer.k8s-loadbalancer.id
+  count = var.lb_enabled ? 1 : 0
+
+  load_balancer_id = hcloud_load_balancer.k8s-loadbalancer[0].id
   type = "label_selector"
   label_selector = "lb"
   use_private_ip = true

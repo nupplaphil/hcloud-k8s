@@ -12,6 +12,7 @@
       worker2_servertype: "{{ worker2_servertype }}"
       worker3_servertype: "{{ worker3_servertype }}"
       worker4_servertype: "{{ worker4_servertype }}"
+      lb_enabled: "{{ lb_enabled }}"
       lb_datacenter: "{{ lb_datacenter }}"
       lb_type: "{{ lb_type }}"
       worker1_count: "{{ worker1_count }}"

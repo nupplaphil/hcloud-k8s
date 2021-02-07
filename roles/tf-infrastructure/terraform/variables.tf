@@ -69,3 +69,8 @@ variable "lb_datacenter" {
   type        = string
   description = "Loadbalancer datacenter - Replaced by Ansible Playbook on run"
 }
+
+variable "lb_enabled" {
+  type        = bool
+  description = "Enable Loadbalancer - Replaced by Ansible Playbook on run"
+}

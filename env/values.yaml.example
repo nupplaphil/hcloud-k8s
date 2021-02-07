@@ -11,6 +11,10 @@ worker1_servertype: cx11-ceph
 worker2_servertype: cx11-ceph
 worker3_servertype: cx11-ceph
 worker4_servertype: cx11-ceph
+# enable/disable loadbalancer
+lb_enabled: "true"
+# enable/disable ingress
+ingress_enabled: "true"
 
 # Loadbalancer type
 lb_type: lb11
