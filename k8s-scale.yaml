@@ -21,7 +21,11 @@
     - { role: kube-master, tags: kube-master }
 
 - name: Join Worker-Nodes to Master
-  hosts: worker
+  hosts:
+    - worker1
+    - worker2
+    - worker3
+    - worker4
   gather_facts: yes
   remote_user: k8s
   become: yes

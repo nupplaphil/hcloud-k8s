@@ -16,4 +16,4 @@
   local_action: copy content="{{ join.stdout }}" dest="/tmp/join.sh"
   when: master.stat.exists
   vars:
-     ansible_become: no
+    ansible_become: no
