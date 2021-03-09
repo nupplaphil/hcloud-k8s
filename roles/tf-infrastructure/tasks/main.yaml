@@ -25,6 +25,8 @@
       worker3_count: "{{ worker3_count }}"
       worker4_count: "{{ worker4_count }}"
       domain: "{{ domain }}"
+      vswitch_enabled: "{{ vswitch_enabled }}"
+      vswitch_id: "{{ vswitch_id }}"
   register: tf
 
 - name: Create Infrastructure File

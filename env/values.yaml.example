@@ -42,3 +42,6 @@ domain: example.com
 kubenetes_version: 1.17.4
 local_kube_context_path: /home/<YOUR-USER>/.kube
 cert_email: user@sample.org
+# vSwitch configuration - see https://docs.hetzner.com/robot/dedicated-server/network/vswitch/
+vswitch_enabled: "false"
+vswitch_id: 0

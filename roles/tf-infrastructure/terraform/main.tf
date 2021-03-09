@@ -26,6 +26,18 @@ resource "hcloud_network_subnet" "worker" {
   depends_on = [hcloud_network.default]
 }
 
+resource "hcloud_network_subnet" "vswitch" {
+  count = var.lb_enabled ? 1 : 0
+
+  network_id   = hcloud_network.default.id
+  type         = "vswitch"
+  ip_range     = "10.0.3.0/24"
+  network_zone = "eu-central"
+  vswitch_id   = var.vswitch_id
+
+  depends_on = [hcloud_network.default]
+}
+
 resource "hcloud_server" "master" {
   count       = 1
   name        = "master"

@@ -74,3 +74,13 @@ variable "lb_enabled" {
   type        = bool
   description = "Enable Loadbalancer - Replaced by Ansible Playbook on run"
 }
+
+variable "vswitch_enabled" {
+  type        = bool
+  description = "Enable vSwitch - Replaced by Ansible Playbook on run"
+}
+
+variable "vswitch_id" {
+  type        = number
+  description = "vSwitch ID - Replaced by Ansible Playbook on run"
+}
