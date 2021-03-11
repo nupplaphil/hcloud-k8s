@@ -6,8 +6,6 @@ The Playbook install a Master and Workers with Private Networking inclusive Clou
 Tested Versions Kubernetes v1.19.6
 
 ---
-# Forked to align with more current dependencies
-
 ## Local Requirements
   - Ansible v2.9.6 (https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
   - Terraform v0.14.7 (https://github.com/tfutils/tfenv#installation)
