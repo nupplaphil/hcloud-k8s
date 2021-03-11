@@ -23,11 +23,17 @@ Tested Versions Kubernetes v1.19.6
   - Enable the Loadbalancer feature with setting `lb_enabled` to "true"
   - Enable the Ingress feature with setting `ingress_enabled` to "true"
   - Add for `lb_hostname` a valid DNS-Entry (necessary for Certificate Requests)
+  - Add your email at `cert_email`
 
 ## Prerequirement for managing loadblancer DNS Entries
   - Add for `dns_zone_id` a valid DNS-Zone ID of the hetzner dns console (retrieve from the last DNS URI part -> https://dns.hetzner.com/zone/XXxxxxxXX")
   - Add for `dns_lb_a` a comma separated list of valid DNS A-Entries for the loadbalancer (wildcard is supported)
   - Add for `hetzner_dns_token` a valid Hetzner DNS API Token (retrieve from https://dns.hetzner.com/settings/api-token)
+
+## Prerequirement for connecting to dedicated root servers
+  - Enable the vSwitch feature with `vswitch_enabled` to "true"
+  - Create a vSwitch and map it to your root server (explained here https://docs.hetzner.com/robot/dedicated-server/network/vswitch/)
+  - Add for `vswitch_id` the ID of the created vSwitch
 
 ## Create Infrastructure Ansible Playbook Terrafom Module
 ```bash
@@ -69,7 +75,8 @@ The playbook will setup new nodes and join them already created cluster. You sho
     - Create 1 master
     - Create up to 4 different workers (depends on config-types)
     - (optional) Create a hetzner loadbalancer
-    - (optional) creata A-Records for the hetzner loadbalancer  
+    - (optional) Creata A-Records for the hetzner loadbalancer
+    - (optional) Add the VLAN of your dedicated root servers
   - Prepare Kubernetes Tools and Configuration on all Servers
   - Install Master-Node
   - Join Worker-Nodes to Master
