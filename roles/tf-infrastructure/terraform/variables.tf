@@ -85,11 +85,6 @@ variable "vswitch_id" {
   description = "vSwitch ID - Replaced by Ansible Playbook on run"
 }
 
-variable "dns_enabled" {
-  type        = bool
-  description = "Enable DNS support - Replaced by Ansible Playbook on run"
-}
-
 variable "dns_zone_id" {
   type        = string
   description = "DNS Zone ID - Replaced by Ansible Playbook on run"

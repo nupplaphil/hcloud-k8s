@@ -10,17 +10,24 @@ Tested Versions Kubernetes v1.19.6
 
 ## Local Requirements
   - Ansible v2.9.6 (https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
-  - Terraform v0.12.29 (https://github.com/tfutils/tfenv#installation)
+  - Terraform v0.14.7 (https://github.com/tfutils/tfenv#installation)
   - Kubectl v1.19.6 (https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
-## Prerequirments edit the following files
+## Prerequirement edit the following files
   - create a HCloud Project in Hetzner Cloud Console
   - copy/rename "env/values.yaml.example" to "env/values.yaml"
   - create a API Token and set in "env/values.yaml"
   - edit the values in "env/values.yaml"
 
-## Prerequriements for Ingress & Let's Encrypt! support
+## Prerequirement for Ingress & Let's Encrypt! support
+  - Enable the Loadbalancer feature with setting `lb_enabled` to "true"
+  - Enable the Ingress feature with setting `ingress_enabled` to "true"
   - Add for `lb_hostname` a valid DNS-Entry (necessary for Certificate Requests)
+
+## Prerequirement for managing loadblancer DNS Entries
+  - Add for `dns_zone_id` a valid DNS-Zone ID of the hetzner dns console (retrieve from the last DNS URI part -> https://dns.hetzner.com/zone/XXxxxxxXX")
+  - Add for `dns_lb_a` a comma separated list of valid DNS A-Entries for the loadbalancer (wildcard is supported)
+  - Add for `hetzner_dns_token` a valid Hetzner DNS API Token (retrieve from https://dns.hetzner.com/settings/api-token)
 
 ## Create Infrastructure Ansible Playbook Terrafom Module
 ```bash
@@ -61,11 +68,12 @@ The playbook will setup new nodes and join them already created cluster. You sho
   - Create Infrastructure on Hetzner Cloud with Terraform (roles/tf-infrastructure/terraform/)
     - Create 1 master
     - Create up to 4 different workers (depends on config-types)
-    - Create a hetzner loadbalancer
+    - (optional) Create a hetzner loadbalancer
+    - (optional) creata A-Records for the hetzner loadbalancer  
   - Prepare Kubernetes Tools and Configuration on all Servers
   - Install Master-Node
   - Join Worker-Nodes to Master
-  - Install NGINX Ingress & Cert-Manager (Let's Encrypt! with prod & staging certificate)
+  - (optional) Install NGINX Ingress & Cert-Manager (Let's Encrypt! with prod & staging certificate)
   - Cleanup
 
 ## Caution Security
