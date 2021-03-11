@@ -45,3 +45,11 @@ cert_email: user@sample.org
 # vSwitch configuration - see https://docs.hetzner.com/robot/dedicated-server/network/vswitch/
 vswitch_enabled: "false"
 vswitch_id: 0
+# Enable / disable automatic DNS setting
+dns_enabled: "false"
+# The DNS Zone Id (retrieve from the last DNS URI part -> https://dns.hetzner.com/zone/XXxxxxxXX")
+dns_zone_id: "XXXXxxxXXX...
+# A Hetzner DNS API Token - see https://dns.hetzner.com/settings/api-token
+hetzner_dns_token: XXXxxxXXXxxx....
+# A comma-separated List of A-Entries for the loadbalancer
+dns_lb_a: "test,test2"

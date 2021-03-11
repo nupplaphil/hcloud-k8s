@@ -22,4 +22,8 @@
       domain: "{{ domain }}"
       vswitch_enabled: "{{ vswitch_enabled }}"
       vswitch_id: "{{ vswitch_id }}"
+      dns_enabled: "{{ dns_enabled }}"
+      dns_zone_id: "{{ dns_zone_id }}"
+      hetzner_dns_token: "{{ hetzner_dns_token }}"
+      dns_lb_a: "{{ dns_lb_a }}"
   register: tf

@@ -1,3 +1,17 @@
+terraform {
+  required_providers {
+    hdns = {
+      source = "alxrem/hdns"
+    }
+
+    hcloud = {
+      source = "hetznercloud/hcloud"
+    }
+  }
+
+  required_version = ">= 0.13"
+}
+
 provider "hcloud" {
   token = var.hcloud_token
 }
@@ -181,4 +195,20 @@ resource "hcloud_load_balancer_target" "k8s-targets" {
   use_private_ip = true
 
   depends_on = [hcloud_load_balancer_network.kubernetes]
+}
+
+# DNS Settings
+provider "hdns" {
+  token = var.hetzner_dns_token
+}
+
+resource "hdns_record" "a" {
+  count      = length(split(",", var.dns_lb_a))
+
+  zone_id    = var.dns_zone_id
+  name       = split(",", var.dns_lb_a)[count.index]
+  value      = hcloud_load_balancer.k8s-loadbalancer[0].ipv4
+  type       = "A"
+
+  depends_on = [hcloud_load_balancer.k8s-loadbalancer]
 }

@@ -84,3 +84,23 @@ variable "vswitch_id" {
   type        = number
   description = "vSwitch ID - Replaced by Ansible Playbook on run"
 }
+
+variable "dns_enabled" {
+  type        = bool
+  description = "Enable DNS support - Replaced by Ansible Playbook on run"
+}
+
+variable "dns_zone_id" {
+  type        = string
+  description = "DNS Zone ID - Replaced by Ansible Playbook on run"
+}
+
+variable "dns_lb_a" {
+  type        = string
+  description = "List of A-DNS Entries for the Loadbalancer - Replaced by Ansible Playbook on run"
+}
+
+variable "hetzner_dns_token" {
+  type        = string
+  description = "Hetzner DNS API Token - Replaced by Ansible Playbook on run"
+}
