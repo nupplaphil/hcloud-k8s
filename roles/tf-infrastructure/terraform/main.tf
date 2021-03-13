@@ -203,7 +203,7 @@ provider "hdns" {
 }
 
 resource "hdns_record" "a" {
-  count      = length(var.dns_lb_a) > 0 ? length(split(",", var.dns_lb_a)) : 0
+  count      = var.dns_enabled ? length(split(",", var.dns_lb_a)) : 0
 
   zone_id    = var.dns_zone_id
   name       = split(",", var.dns_lb_a)[count.index]

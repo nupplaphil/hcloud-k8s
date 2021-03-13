@@ -1,4 +1,20 @@
 ---
+- name: Get DNS Zone response
+  uri:
+    url: "https://dns.hetzner.com/api/v1/zones?name={{ dns_zone_name }}"
+    method: GET
+    return_content: yes
+    body_format: json
+    headers:
+      Auth-API-Token: "{{ hetzner_dns_token }}"
+  register: dns_api_response
+  until: dns_api_response.status == 200
+  when: dns_enabled
+
+- name: Get DNS Zone ID
+  set_fact:
+    dns_zone_id: "{{ dns_api_response.json.zones[0].id if dns_enabled == 'true' else 0 }}"
+
 - name: Destroy Infrastructure with Terraform
   terraform:
     project_path: "{{ playbook_dir }}/roles/tf-infrastructure/terraform"
@@ -22,6 +38,7 @@
       domain: "{{ domain }}"
       vswitch_enabled: "{{ vswitch_enabled }}"
       vswitch_id: "{{ vswitch_id }}"
+      dns_enabled: "{{ dns_enabled }}"
       dns_zone_id: "{{ dns_zone_id }}"
       hetzner_dns_token: "{{ hetzner_dns_token }}"
       dns_lb_a: "{{ dns_lb_a }}"
