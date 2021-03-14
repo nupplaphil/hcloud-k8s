@@ -7,16 +7,31 @@
     msg: "Server is not ready!!!"
   when: not ready.stat.exists
 
+- name: Get hetzner server config
+  uri:
+    url: "https://api.hetzner.cloud/v1/servers?name={{ ansible_hostname }}"
+    method: GET
+    return_content: yes
+    body_format: json
+    headers:
+      Authorization: "Bearer {{ hetzner_token }}"
+  register: api_response
+  until: api_response.status == 200
+
+- name: Get private ip
+  set_fact:
+    private_ip: "{{ api_response.json.servers[0].private_net[0].ip }}"
+
 - name: Copy cloud config provider flag for kubeadm
-  copy:
-    src: "{{ playbook_dir }}/roles/kube-prepare/files/20-hetzner-cloud.conf"
+  template:
+    src: 20-hetzner-cloud-master.conf.j2
     dest: /etc/systemd/system/kubelet.service.d/20-hetzner-cloud.conf
   when:
     - hostvars[inventory_hostname].group_names[1] is not defined or hostvars[inventory_hostname].group_names[1] is not match ("worker.")
 
 - name: Create cloud config provider flag for kubeadm
   template:
-    src: 20-hetzner-cloud.conf.j2
+    src: 20-hetzner-cloud-worker.conf.j2
     dest: /etc/systemd/system/kubelet.service.d/20-hetzner-cloud.conf
   when:
     - hostvars[inventory_hostname].group_names[1] is defined
