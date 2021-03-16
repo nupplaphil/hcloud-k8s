@@ -50,6 +50,9 @@
 - name: Reload system daemon
   shell: systemctl daemon-reload
 
+- name: Restart docker to include new arguments
+  shell: systemctl restart docker.service
+
 - name: Insert/Update sysctl settings for traffic forwarding
   blockinfile:
     path: /etc/sysctl.conf
