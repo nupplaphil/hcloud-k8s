@@ -20,7 +20,7 @@ packages:
 runcmd:
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
   - curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-  - curl -fsSL https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+  - curl -fsSL https://baltocdn.com/helm/signing.asc | apt-key add -
   - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
   - add-apt-repository "deb http://packages.cloud.google.com/apt/ kubernetes-xenial main"
   - add-apt-repository "deb https://baltocdn.com/helm/stable/debian/ all main"
