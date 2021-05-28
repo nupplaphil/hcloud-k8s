@@ -41,7 +41,7 @@ resource "hcloud_network_subnet" "worker" {
 }
 
 resource "hcloud_network_subnet" "vswitch" {
-  count = var.lb_enabled ? 1 : 0
+  count = var.vswitch_enabled ? 1 : 0
 
   network_id   = hcloud_network.default.id
   type         = "vswitch"
